@@ -1,10 +1,19 @@
+# Use Node.js image
 FROM registry.access.redhat.com/ubi8/nodejs-18
-USER root
+
+# Set working directory
 WORKDIR /opt/app-root/src
+
+# Copy application source code
 COPY . .
-RUN useradd -m myuser
-RUN chown -R myuser:myuser /opt/app-root/src
-USER myuser
+
+# Install dependencies
 RUN npm install
+
+# Expose application port
+EXPOSE 8080
+
+# Start the app
 CMD ["npm", "start"]
+
 
